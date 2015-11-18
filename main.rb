@@ -7,5 +7,5 @@ while true
 	file_path = gets.chomp
 	text_processed = Style.new(file_path)
 	##text_processed.simple_output
-	puts(text_processed.text_words)
+	puts(text_processed.output_spell_check)
 end

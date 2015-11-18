@@ -30,10 +30,11 @@ class TestStyle < MiniTest::Unit::TestCase
 	end
 
 	def test_spell_check
-		assert !@paragraph.check?('d0g'), "spelled incorrect"
-		assert @paragraph.check?('dog'), "spelled correct"
-		refute_nil @paragraph.suggest('d0g')
-		mark_up = @paragraph.spell_check_all(@paragraph.text_words)
+		assert !Hunspell.check?('d0g'), "spelled incorrect"
+		assert Hunspell.check?('dog'), "spelled correct"
+		refute_nil Hunspell.suggest('d0g')
+		mark_up = @paragraph.spellcheck
 		assert_equal 2, mark_up.select{ |element| element.class == Hash}.count
 	end
+
 end
