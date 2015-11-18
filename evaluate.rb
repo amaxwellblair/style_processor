@@ -1,7 +1,9 @@
-require 'ffi/hunspell'
-
+require 'hunspell_interface'
 
 module Evaluate
+	include Hunspell
+
+	Ender = [ "\. ", "\? ", "! ", "\.", "\?", "!" ]
 
 	##Each element in the text_arr must be a word
 	def spell_check_all(text_arr)
@@ -9,7 +11,11 @@ module Evaluate
 		checked_text = []
 
 		text_arr.each do |word|
-			check_arr << Hunspell.check?(word)
+			if ender?(word)
+				check_arr << true
+			else
+				check_arr << check?(word)
+			end
 		end
 
 		check_arr.each_with_index do |bool, i|
@@ -17,33 +23,20 @@ module Evaluate
 				 checked_text << text_arr[i]
 			else
 				checked_text << {original: text_arr[i],
-												 suggests: Hunspell.suggest(text_arr[i])}
+												 suggests: suggest(text_arr[i])}
 			end
 		end
 		return checked_text
 	end
 
-
-	##Created for ease of use
-	module Hunspell
-		def check?(str)
-			FFI::Hunspell.dict do |dict|
-				dict.check?(str)
+	def ender?(str)
+		Ender.each do |ending|
+			if str == ending
+				return true
 			end
 		end
-
-		def suggest(str)
-			FFI::Hunspell.dict do |dict|
-				dict.suggest(str)
-			end
-		end
-
-		def stem(str)
-			FFI::Hunspell.dict do |dict|
-				dict.stem(str)
-			end
-		end
-
+		return false
+	end
 
 
 end
