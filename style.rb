@@ -7,7 +7,7 @@ class Style
 
 	include Evaluate
 
-	Ender = [ "\. ", "\? ", "! ", "\.", "\?", "!" ]
+
 	def initialize(file_path)
 		by_word(read_file(file_path))
 	end
@@ -62,15 +62,6 @@ class Style
 	end
 
 	private
-
-	def ender?(str)
-		Ender.each do |ending|
-			if str == ending
-				return true
-			end
-		end
-		return false
-	end
 
 	def count(text_arr)
 		counter = -1
