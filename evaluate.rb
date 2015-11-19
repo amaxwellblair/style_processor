@@ -31,12 +31,12 @@ module Evaluate
 
 	def by_sentence(text_array)
 		text_array = text_array.join("\n")
-		text_array = text_array.split(/(\. |\? |! |\n )/) ##KEEP WORKING ON INCLUDING DELIMINATORS
-		if ender?(text_array.last[-1]) ##for enders that are not split (usually last)
-			new_end = text_array.last[-1]
-			new_sent = text_array.pop[0..-2]
-			text_array << new_sent << new_end
-		end
+		text_array = text_array.split(/(\.|\?|!|\n)/) ##KEEP WORKING ON INCLUDING DELIMINATORS
+		##if ender?(text_array.last[-1]) ##for enders that are not split (usually last)
+			##new_end = text_array.last[-1]
+			##new_sent = text_array.pop[0..-2]
+			##text_array << new_sent << new_end
+		##end
 		return text_array
 		##you also need to check the last one for an ender
 	end
@@ -77,6 +77,13 @@ module Evaluate
 		end
 		return false
 	end
+	##only words can be put into this text_arr
+	def delete_enders(text_arr)
+		Ender.each {|ending| text_arr.delete(ending)}
+		return text_arr
+	end
+
+
 
 
 end
