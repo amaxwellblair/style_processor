@@ -1,7 +1,9 @@
 require 'hunspell_interface'
+require 'lexical'
 
 module Evaluate
 	include Hunspell
+	include Lexicon
 
 	Ender = [ "\. ", "\? ", "! ", "\.", "\?", "!" ]
 
@@ -28,6 +30,26 @@ module Evaluate
 		end
 		return checked_text
 	end
+
+	def thesaurus_all(text_arr)
+		rep_arr = []
+		text_arr.each_with_index do |word,i|
+			if ender?(word) || pronoun?(word,text_arr[i-1])
+				next
+			else
+				repetition = repeats(word,text_arr)
+				puts(repetition)
+				if repetition
+					rep_arr << repetition[:suggests] = Lexicon.synonym(repetition[:original])
+				end
+			end
+		end
+		rep_arr.keep_if{|hsh| hsh[:original].length > 3}
+		rep_arr.sort_by!{|a,b| a[:number] <=> b[:number]}
+
+		return rep_arr
+	end
+
 
 	def by_sentence(text_array)
 		text_array = text_array.join("\n")
@@ -83,6 +105,29 @@ module Evaluate
 		return text_arr
 	end
 
+	def repeats(str, text_arr)
+		rep_hash = {}
+		if text_arr.select{|word| word == str}.length > 1
+			 rep_hash[:number] = text_arr.select!{|word| word == str}.length
+			 rep_hash[:original] = str
+		end
+		return rep_hash
+	end
+
+	def pronoun?(str, str_before)
+		if upcase?(str.chars[0]) && !ender?(str_before)
+			return true
+		end
+			return false
+	end
+
+	def upcase?(char)
+		if char == /[A-Z]/
+			return true
+		else
+			return false
+		end
+	end
 
 
 

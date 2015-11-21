@@ -6,7 +6,7 @@ require 'style'
 class TestStyle < MiniTest::Unit::TestCase
 
 	def setup
-		sample_text = "Hello! My nme is maxwell. I live in Denver and I lve to eat crabs. I love chicken and Indian food too. I do not know if I like red meat anymore given the health effects? We'll see soon enough."
+		sample_text = "Hello! My nme is maxwell. I live in Denver and I lve to eat crabs. I like chicken and Indian food too. I do not know if I like red meat anymore given the health effects? We'll see soon enough."
  		file_path = "./testing/sample.txt"
  		##if File.exist?(file_path) && File.size?(file_path)
  		##	@paragraph = Style.new(file_path)
@@ -35,6 +35,14 @@ class TestStyle < MiniTest::Unit::TestCase
 		refute_nil Hunspell.suggest('d0g')
 		mark_up = @paragraph.spellcheck
 		assert_equal 2, mark_up.select{ |element| element.class == Hash}.count
+	end
+
+	def test_thesaurus
+		refute_nil Lexicon.synonym('dog')
+		assert_equal "noun", Lexicon.part_of_speech('dog')
+		synonyms = @paragraph.thesaurus
+		assert_equal 0, synonyms.length
+		puts(synonyms)
 	end
 
 end

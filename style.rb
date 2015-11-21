@@ -34,7 +34,10 @@ class Style
 
 	def spellcheck
 		spell_check_all(@text_words)
+	end
 
+	def thesaurus
+		thesaurus_all(@text_words)
 	end
 
 end
