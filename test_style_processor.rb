@@ -41,8 +41,8 @@ class TestStyle < MiniTest::Unit::TestCase
 		refute_nil Lexicon.synonym('dog')
 		assert_equal "noun", Lexicon.part_of_speech('dog')
 		synonyms = @paragraph.thesaurus
-		assert_equal 0, synonyms.length
-		puts(synonyms)
+		assert_equal 1, synonyms.length
+		##puts(synonyms)
 	end
 
 end

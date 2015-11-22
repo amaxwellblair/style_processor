@@ -1,5 +1,6 @@
 ##require 'Wordnik'
-##Don't have the Wordnik API key yet!
+##Don't have the Wordnik API key yet so coding around the functions that will
+##be located in the API
 
 
 module Lexicon

@@ -38,15 +38,21 @@ module Evaluate
 				next
 			else
 				repetition = repeats(word,text_arr)
-				puts(repetition)
-				if repetition
-					rep_arr << repetition[:suggests] = Lexicon.synonym(repetition[:original])
-				end
-			end
-		end
-		rep_arr.keep_if{|hsh| hsh[:original].length > 3}
-		rep_arr.sort_by!{|a,b| a[:number] <=> b[:number]}
 
+				if repetition
+					if rep_arr.all?{|hsh| hsh[:original] != repetition[:original]} || rep_arr.empty?
+						repetition[:suggests] = Lexicon.synonym(repetition[:original])
+						rep_arr << repetition
+					end
+				end
+
+			end
+
+		end
+
+		rep_arr.keep_if{|hsh| hsh[:original].length > 3}
+		rep_arr.sort!{|a,b| a[:number] <=> b[:number]}
+		#puts(rep_arr)
 		return rep_arr
 	end
 
@@ -108,10 +114,12 @@ module Evaluate
 	def repeats(str, text_arr)
 		rep_hash = {}
 		if text_arr.select{|word| word == str}.length > 1
-			 rep_hash[:number] = text_arr.select!{|word| word == str}.length
+			 rep_hash[:number] = text_arr.select{|word| word == str}.length
 			 rep_hash[:original] = str
-		end
-		return rep_hash
+			 return rep_hash
+		 else
+			 return nil
+		 end
 	end
 
 	def pronoun?(str, str_before)
