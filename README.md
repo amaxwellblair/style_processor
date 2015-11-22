@@ -1,66 +1,37 @@
-Need:
-	I have a hard time writing in accordance with well known style.
-	Would like a computer to tell me what I am doing wrong and why.
-	most spell check devices just tell? me there is something wrong
-	I would like more then that and a deeper correction.
-	Although this is all opinion based. so the need to disable items
-	based on preference is key.
+Style Processor
+==============
 
-Style processor:
-	takes in a text document and returns information on said text
-	returned information:
-		basic statistics
-		style guide conflicts
-			weird placements of nouns, verbs, adjectives
-			using words like 'very'
-			maybe something on tense?
-		repeated words and synonyms for such words
-		variability of sentence length
-		spelling errors - seems that the spell checker only works on
-		a word by word basis - each word has to be categorized by the
-		dictionary anyways so if not found by dictionary use
-		spellcheck
+Purpose
+--------
+It can be difficult to write consistently in the proper style and technique when modern day professionals have to wear many different hats. For example an influential technology profession could write an email, blog post and presentation all in the same day. Causing overlapping styles when they may be inappropriate.
 
-		Elements of style:
-			Check for oxford comma versus stand comma usage
-			all comma usage pg 3.
-			colons pg 8
-			pg 9 plural vs singular
+	>For example writing long descriptive sentences in an email. When shorter >functional sentences should be emphasized.
 
+The Style Processor should be able to process text and alert the professional to style inconsistencies.
 
+Goals
+---------
+*Spell checking*
+Spell check functionality may not be the direct goal of the Style Processor but most users expect at a minimum a text processor will be able to check for misspelled words.
 
-Output:
-	Different output for each type of rule. Style processor evaluates
-	everything and then there are is an output for each evaluation.
+1. Hunspell (Industry standard) is the API being utilized for this functionality
+- Complete
+2. Output incorrect words and suggestions
+- Complete in terminal -> Incomplete in HTML
 
+*Thesaurus*
+Check for repeated words and suggest alternatives.
 
-Mechanics:
-	Each test is its on unit which can be placed in to the processor
+1. Wordnik is the API chosen to be utilized
+- Wordnik has not delivered an API key as of yet (if this doesn't occur a different provider will be chosen)
+- Foundation for the API has already been created and tested. Production of full thesaurus functionality is at a gating point
+2. Output repeated words and suggest synonyms for replacement
+- Incomplete in HTML
 
-	the processor on its own should be able to pick up spelling
-	errors and definitions of words (hopefully there is a dictionary
-	API)
+*Sentence statistics*
+Count, length, type and other functions. Compile statistics on common style types (prose, email, presentation, blog post, etc.)
 
-	Once the processor is complete - each test can be created and
-	tested
+1. No progress
 
-	The processor itself is an OBJECT (so it is a class)
-		Within the processor there are many functions
-		Each function is a different rule/constraint
-
-
-Flow:
-	Read text into processor (Class processor)
-		create an instance of the processor on what is read in
-		interface for evaluate and output
-	Evaluate (Class < processor)
-		are these just the rules of style being applied to the text
-
-	Output (Class < processor)
-		the product of evaluate is then prepped and shipped
-
-Instructions: Hunspell
-	In order to properly install ffi-hunspell the gem needs to be downloaded then
-	the dictionary needs to be downloaded. For this project en_US was used. This
-	file's directory is then referenced with in the ffi-hunspell gem as a known
-	directory
+*TBD*
+Use book "Elements of Style" to include more m

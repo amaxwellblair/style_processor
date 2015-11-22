@@ -52,7 +52,7 @@ module Evaluate
 
 		rep_arr.keep_if{|hsh| hsh[:original].length > 3}
 		rep_arr.sort!{|a,b| a[:number] <=> b[:number]}
-		#puts(rep_arr)
+		##puts(rep_arr)
 		return rep_arr
 	end
 
