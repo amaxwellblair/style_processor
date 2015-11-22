@@ -5,8 +5,7 @@ Purpose
 --------
 It can be difficult to write consistently in the proper style and technique when modern day professionals have to wear many different hats. For example an influential technology profession could write an email, blog post and presentation all in the same day. Causing overlapping styles when they may be inappropriate.
 
-	>For example writing long descriptive sentences in an email.
-	>When shorter functional sentences should be emphasized.
+ - For example writing long descriptive sentences in an email. When shorter functional sentences should be emphasized.
 
 The Style Processor should be able to process text and alert the professional to style inconsistencies.
 
