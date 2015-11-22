@@ -38,4 +38,4 @@ Count, length, type and other functions. Compile statistics on common style type
 
 **TBD**
 
-Use book "Elements of Style" to include more m
+Use book "Elements of Style" to include more idiosyncratic style points!
